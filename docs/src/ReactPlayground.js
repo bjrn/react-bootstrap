@@ -76,7 +76,15 @@ const Well = require('../../src/Well');
 const bootstrapUtils = require('../../src/utils/bootstrapUtils');
 /* eslint-enable */
 
-import babel from 'babel-core/browser';
+// import babel from 'babel-core/browser';
+const Babel = require('babel-standalone');
+const BABEL_CONFIG = {
+  'presets': ['react', 'es2015', 'stage-1'],
+  'plugins': [
+    'transform-runtime',
+    'transform-decorators-legacy'
+  ]
+};
 import CodeExample from './CodeExample';
 
 const IS_MOBILE = typeof navigator !== 'undefined' && (
@@ -170,7 +178,8 @@ const ReactPlayground = React.createClass({
   getDefaultProps() {
     return {
       transformer(code) {
-        return babel.transform(code).code;
+        // return babel.transform(code).code;
+        return Babel.transform(code, BABEL_CONFIG).code;
       }
     };
   },

@@ -2,15 +2,15 @@ import webpack from 'webpack';
 import yargs from 'yargs';
 
 export const options = yargs
-  .alias('p', 'optimize-minimize')
-  .alias('d', 'debug')
-  .option('port', {
-    default: '8080',
-    type: 'string'
-  })
-  .argv;
+    .alias('p', 'optimize-minimize')
+    .alias('d', 'debug')
+    .option('port', {
+      default: '8080',
+      type: 'string'
+    })
+    .argv;
 
-export const jsLoader = 'babel?cacheDirectory';
+export const jsLoader = 'babel';
 
 const baseConfig = {
   entry: undefined,
@@ -20,9 +20,11 @@ const baseConfig = {
   externals: undefined,
 
   module: {
-    loaders: [
-      { test: /\.js/, loader: jsLoader, exclude: /node_modules/ }
-    ]
+    loaders: [{
+      test: /\.js/,
+      loader: jsLoader,
+      exclude: /node_modules/
+    }]
   },
 
   plugins: [

@@ -30,10 +30,16 @@ const Root = React.createClass({
     // Dump out our current props to a global object via a script tag so
     // when initialising the browser environment we can bootstrap from the
     // same props as what each page was rendered with.
+    let propData = {};
+    try {
+      propData = JSON.stringify(Root.propData);
+    } catch (err) {
+      console.error('propData stringification failed', err);
+    }
     let browserInitScriptObj = {
       __html:
         `window.ASSET_BASE_URL = ${JSON.stringify(Root.assetBaseUrl)};
-        window.PROP_DATA = ${JSON.stringify(Root.propData)};
+        window.PROP_DATA = ${propData};
         // console noop shim for IE8/9
         (function (w) {
           var noop = function () {};

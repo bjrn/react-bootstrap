@@ -7,8 +7,10 @@ import deprecationWarning from './utils/deprecationWarning';
 
 class ButtonInput extends InputBase {
   renderFormGroup(children) {
+    /* eslint-disable */
     let {bsStyle, value, ...other} = this.props;
     return <FormGroup {...other}>{children}</FormGroup>;
+    /* eslint-enable */
   }
 
   renderInput() {
